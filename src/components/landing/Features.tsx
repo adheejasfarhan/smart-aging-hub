@@ -5,7 +5,7 @@ const features = [
   {
     icon: Activity,
     title: 'Routine Monitoring',
-    description: 'Track daily movement, device usage, and habits with passive smart-home sensors. See what's normal vs. what's changed.',
+    description: 'Track daily movement, device usage, and habits with passive smart-home sensors. See what\'s normal vs. what\'s changed.',
     color: 'text-primary bg-primary/10',
   },
   {
