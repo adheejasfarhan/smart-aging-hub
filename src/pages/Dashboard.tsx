@@ -130,6 +130,9 @@ const Dashboard = () => {
           </Card>
         </div>
 
+
+        <RegisteredUsers />
+
         {/* Medication Schedule */}
         <Card className="border-border/50">
           <CardHeader className="pb-3">
