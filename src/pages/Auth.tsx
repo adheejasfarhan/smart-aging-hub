@@ -107,8 +107,8 @@ const AuthPage = () => {
                   </div>
                 </div>
               )}
-              <Button type="submit" className="w-full gradient-primary text-primary-foreground border-0 hover:opacity-90">
-                {isSignup ? 'Create Account' : 'Log In'}
+              <Button type="submit" disabled={submitting} className="w-full gradient-primary text-primary-foreground border-0 hover:opacity-90">
+                {submitting ? 'Please wait…' : isSignup ? 'Create Account' : 'Log In'}
               </Button>
             </form>
           </CardContent>
