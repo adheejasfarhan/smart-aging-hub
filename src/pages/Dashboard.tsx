@@ -7,6 +7,7 @@ import { Activity, AlertTriangle, Bell, Check, Clock, Pill, User, ChevronRight }
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
+import RegisteredUsers from '@/components/dashboard/RegisteredUsers';
 
 const Dashboard = () => {
   const {
@@ -128,6 +129,9 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </div>
+
+
+        <RegisteredUsers />
 
         {/* Medication Schedule */}
         <Card className="border-border/50">

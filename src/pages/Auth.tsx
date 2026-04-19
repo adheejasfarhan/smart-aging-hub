@@ -6,6 +6,8 @@ import { Label } from '@/components/ui/label';
 import { useStore } from '@/store/useStore';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Heart } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 const AuthPage = () => {
   const [searchParams] = useSearchParams();
@@ -14,17 +16,32 @@ const AuthPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState<'caregiver' | 'elderly'>('caregiver');
+  const [submitting, setSubmitting] = useState(false);
   const { login, signup } = useStore();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSignup) {
-      signup(name, email, password, role);
-    } else {
-      login(email, password);
+    setSubmitting(true);
+    try {
+      if (isSignup) {
+        const { error } = await supabase
+          .from('users')
+          .insert({ name, email });
+        if (error) {
+          toast.error(error.message.includes('duplicate') ? 'This email is already registered.' : error.message);
+          setSubmitting(false);
+          return;
+        }
+        toast.success('Account created successfully!');
+        signup(name, email, password, role);
+      } else {
+        login(email, password);
+      }
+      navigate('/dashboard');
+    } finally {
+      setSubmitting(false);
     }
-    navigate('/dashboard');
   };
 
   return (
@@ -90,8 +107,8 @@ const AuthPage = () => {
                   </div>
                 </div>
               )}
-              <Button type="submit" className="w-full gradient-primary text-primary-foreground border-0 hover:opacity-90">
-                {isSignup ? 'Create Account' : 'Log In'}
+              <Button type="submit" disabled={submitting} className="w-full gradient-primary text-primary-foreground border-0 hover:opacity-90">
+                {submitting ? 'Please wait…' : isSignup ? 'Create Account' : 'Log In'}
               </Button>
             </form>
           </CardContent>
