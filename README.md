@@ -1,4 +1,4 @@
-Caresync AI
+#Caresync AI
 
  Problem Statement:
 Elderly people living independently often face risks that go unnoticed:
