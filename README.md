@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+Caresync AI
 
  Problem Statement:
 Elderly people living independently often face risks that go unnoticed:
